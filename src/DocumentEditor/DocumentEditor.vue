@@ -3,10 +3,6 @@
 
     <!-- Page overlays (headers, footers, page numbers, ...) -->
 
-    <button draggable="true">
-      Hi alec
-    </button>
-
     <div v-if="overlay" class="overlays">
       <div v-for="(page, page_idx) in pages" class="overlay" :key="page.uuid+'-overlay'" :ref="(elt) => (pages_overlay_refs[page.uuid] = elt)"
         v-html="overlay(page_idx+1, pages.length)" :style="page_style(page_idx, false)">
