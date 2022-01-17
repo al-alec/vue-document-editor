@@ -2,6 +2,11 @@
   <div class="editor" ref="editor">
 
     <!-- Page overlays (headers, footers, page numbers, ...) -->
+
+    <button draggable="true">
+      Hi alec
+    </button>
+
     <div v-if="overlay" class="overlays">
       <div v-for="(page, page_idx) in pages" class="overlay" :key="page.uuid+'-overlay'" :ref="(elt) => (pages_overlay_refs[page.uuid] = elt)"
         v-html="overlay(page_idx+1, pages.length)" :style="page_style(page_idx, false)">
@@ -9,11 +14,11 @@
     </div>
 
     <!-- Document editor -->
-    <div class="content" ref="content" :contenteditable="editable" :style="page_style(-1)" @input="input" @keyup="process_current_text_style">
+    <div class="content" ref="content" id="editor" :contenteditable="editable" :style="page_style(-1)" @input="input" @keyup="process_current_text_style">
       <!-- Contains every page of the document (can be modified by the DOM afterwards) -->
       <div v-for="(page, page_idx) in pages" class="page"
         :key="page.uuid" :ref="(elt) => (pages_refs[page.uuid] = elt)" :data-content-idx="page.content_idx" :data-page-idx="page_idx"
-        :style="page_style(page_idx, page.template ? false : true)" :contenteditable="(editable && !page.template) ? true : false" >
+        :style="page_style(page_idx, page.template ? false : true)" id="editor" :contenteditable="(editable && !page.template) ? true : false" >
         <component v-if="page.template" :is="page.template" v-model="page.props" />
       </div>
     </div>
